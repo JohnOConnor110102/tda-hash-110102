@@ -3,21 +3,10 @@
 #include <stdio.h>
 
 #include "hash.h"
+#include "hash_estructura_privada.h"
 
 #define FACTOR_CARGA_MAXIMO 0.7
-
 const int CAPACIDAD_MINIMA = 3;
-
-typedef struct nodo {
-	char *clave;
-	void *valor;
-	struct nodo *siguiente;
-} nodo_t;
-struct hash {
-	nodo_t **vector;
-	size_t capacidad;
-	size_t cantidad;
-};
 
 unsigned long funcion_hash(const char *str)
 {

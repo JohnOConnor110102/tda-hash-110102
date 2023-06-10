@@ -1,5 +1,6 @@
 #include "pa2m.h"
 #include "src/hash.h"
+#include "src/hash_estructura_privada.h"
 #include <string.h>
 
 bool recorrer_todo_sumando_1_al_aux(const char *clave, void *valor, void *_aux)
@@ -31,20 +32,21 @@ void sumar_uno_destructor(void *_elemento)
 	(*valor)++;
 	return;
 }
+
 void pruebas_hash_creacion()
 {
 	hash_t *hash = hash_crear(0);
 	pa2m_afirmar(!!hash,
 		     "Se puede crear un hash con capacidad inicial menor a 3.");
-	/* pa2m_afirmar(
+	pa2m_afirmar(
 		hash->capacidad == 3,
-		"Se crea un hash con capacidad 1, pero se inicializa en 3.\n"); */
+		"Se crea un hash con capacidad 1, pero se inicializa en 3.\n");
 	hash_t *hash2 = hash_crear(10);
 	pa2m_afirmar(!!hash2,
 		     "Se puede crear un hash con capacidad inicial mayor a 3.");
-	/* pa2m_afirmar(
+	pa2m_afirmar(
 		hash2->capacidad == 10,
-		"Se crea un hash con capacidad 10, y se inicializa en 10.\n"); */
+		"Se crea un hash con capacidad 10, y se inicializa en 10.\n");
 	pa2m_afirmar(hash_cantidad(hash) == 0 && hash_cantidad(hash2) == 0,
 		     "La cantidad inicial se inicializa correctamente.\n");
 	hash_destruir(hash);
@@ -218,7 +220,7 @@ void pruebas_hash_iterador_interno()
 	hash_destruir(hash);
 }
 
-/* void pruebas_hash_destruir_todo()
+void pruebas_hash_destruir_todo()
 {
 	const char claves[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	int valores[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -233,8 +235,7 @@ void pruebas_hash_iterador_interno()
 			     valores[7] == 9 && valores[8] == 10 &&
 			     valores[9] == 11,
 		     "Se aplica la función a todos los elementos del hash.\n");
-	hash_destruir(hash);
-} */
+}
 
 void pruebas_hash()
 {
@@ -252,8 +253,8 @@ void pruebas_hash()
 	pruebas_hash_contiene();
 	pa2m_nuevo_grupo("---------- Pruebas de Iterador Interno ----------\n");
 	pruebas_hash_iterador_interno();
-	/* pa2m_nuevo_grupo("---------- Pruebas de Destruir Todo ----------\n");
-	pruebas_hash_destruir_todo(); */
+	pa2m_nuevo_grupo("---------- Pruebas de Destruir Todo ----------\n");
+	pruebas_hash_destruir_todo();
 }
 
 int main()
